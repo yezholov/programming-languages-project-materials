@@ -20,10 +20,10 @@ Our goal with this project is to teach you Rust through parsing, and we have cho
 
 You need to:
 * Handle `SQL` syntax errors such as `SELECT / 5 FROM math;` or `SELECT "no matching quotes string' FROM strings;` or `SELECT name WHERE age > 25` (no `FROM` clause).
-* Use our starting project code. You can, however, change the files hierarchy to your liking.
+* Use our starting project code. You can, however, change the file hierarchy to your liking.
 * Comment (document) your code to explain what the code does and how or why you did something.
 * Put your index number in the `Cargo.toml` file instead of `programming_languages_project_your_index_number`.
-* Contact us if you think we forgot something, made a mistake, or have any question.
+* Contact us if you think we forgot something, made a mistake, or have a question.
 
 You don't need to:
 * Semantically check the parsed expressions, meaning you don't need to check for types of columns in clauses (`SELECT name FROM users WHERE name = 5;` is completely okay) and you don't need to check for mathematical errors such as dividing by zero. This is because, in a real database, this step is done only after parsing.
@@ -122,7 +122,7 @@ The `SELECT` statement has four components:
 1. `columns` – A vector of columns from the selected table that the database should return.
 2. `from` – A simple string, containing a table that is being queried (we aren't doing joins because they complicate stuff too much for this project).
 3. `where` – A single expression that is the actual filter for the database query. It is wrapped in an `Option` because not every `SELECT` query contains a filter. The actual name is `r#where` because in Rust, `where` is a reserved keyword, and the prefix `r#` means: interpret this token as a raw string, do not check for keyword matches.
-4. `orderby` – A vector of expressions that define how should the data be ordered. A vector is needed because the data can be ordered by the first column, and then all data that has the same first column can be ordered by the second column, ... Also, the data can be ordered not simply by columns, but by complex expressions as well.
+4. `orderby` – A vector of expressions that define how the data should be ordered. A vector is needed because the data can be ordered by the first column, and then all data that has the same first column can be ordered by the second column, ... Also, the data can be ordered not simply by columns, but by complex expressions as well.
 
 The `CREATE TABLE` statement has two components:
 1. `table_name` – A simple string, the name of the table.
