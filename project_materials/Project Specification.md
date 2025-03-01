@@ -1,5 +1,11 @@
 # Programming Languages – project specification
 
+## Project specification changelog
+
+Look here for any changes to the specification.
+
+* 11.02.2025. – Initial project specification
+
 ## About the project
 
 The project involves implementing a `SQL` parser in Rust. It focuses on parsing `SELECT` and `CREATE` statements with `FROM`, `WHERE`, and `ORDER BY` clauses. The goal is to develop a tokenizer, a parser, a simple CLI and an error-handling mechanism, all of which are combined in order to evaluate a string from a command-line input and output an `SQL` statement.
@@ -14,7 +20,7 @@ The project involves implementing a `SQL` parser in Rust. It focuses on parsing 
 
 ## Project goal
 
-Our goal with this project is to teach you Rust through parsing, and we have chosen the `SQL` language to parse because of its relative simplicity to other programming languages.
+Our goal with this project is to teach you Rust through parsing, and we have chosen this subset of the `SQL` language to parse because of its relative simplicity to other programming languages.
 
 ## Dos and don'ts
 
@@ -22,7 +28,7 @@ You need to:
 * Handle `SQL` syntax errors such as `SELECT / 5 FROM math;` or `SELECT "no matching quotes string' FROM strings;` or `SELECT name WHERE age > 25` (no `FROM` clause).
 * Use our starting project code. You can, however, change the file hierarchy to your liking.
 * Comment (document) your code to explain what the code does and how or why you did something.
-* Put your index number in the `Cargo.toml` file instead of `programming_languages_project_your_index_number`.
+* Put your index number in the `Cargo.toml` file instead of `programming_languages_project_your_index_number`. Also, in the `authors` list, put your academic email.
 * Contact us if you think we forgot something, made a mistake, or have a question.
 
 You don't need to:
@@ -98,6 +104,18 @@ The project you will be building will already contain some entities related to y
 * `Token` – tokens that your tokenizer can produce
 * `Keyword` – `SQL` reserved keywords
 
+Since this project isn't structured like the other projects you have already worked on, we are giving you a general guide on development steps. You don't have to follow these steps, but they are here to give you a sense of direction.
+
+Firstly, transforming a string directly into an SQL statement is hard, because you need to make your parser work with characters one by one. This is where the tokenizer comes into play, and you should develop the tokenizer before anything else. When you have a tokenizer, your basic entity aren't characters anymore, but tokens, and in the parser, there is no worry if a token is typed correctly, or if the token should be interpreted as a keyword, or a number, ...
+
+Secondly, when you make your tokenizer work, you should begin on implementing the Pratt parsing technique. The Pratt parsing technique is essentially a couple of functions that call each other to create an `Expression`. Test it in an isolated environment, where you can feed it arbitrary tokens that you know can be parsed into a valid `Expression`.
+
+Thirdly, the SQL parser, which utilizes the tokenizer and the Pratt parsing technique, is where the SQL logic handled. The SQL parser calls the tokenizer to enable working with tokens. Here, when the user calls the `build_statement` function, you firstly check if the first token in the sequence is `SELECT` or `CREATE`. In the case of `CREATE`, you must check if the second token in the sequence is `TABLE`. If the tokens aren't in the correct order, return an error to the user. When you know that, for example, the first token is `SELECT`, you know that the next batch of tokens are going to be related to the selection expressions. Since selection expressions are separated by a comma, check for commas after each selection expression. When you know there aren't any more selection expressions, the `FROM` keyword must be next. Return an error if there is no `FROM` keyword, or if there is no string after the `FROM` keyword (this string is the table name). Now, you know that the `WHERE` keyword may come, if it's there, parse the expression after it, if it's not there, `ORDER`, `BY` may come, parse the expression after it. This logic is the same in the `CREATE TABLE` statement, but for different keywords and different requirements. When you have all the parts of either statement, create an instance of `Statement` and return it to the user.
+
+When you finish with these three parts, implement a simple CLI and thoroughly test the code.
+
+Error handling can be done on the way, but you can make it more robust once you know you have a working application. 
+
 ---
 ### Entities related to the `Statement` enum (the first big concept)
 
@@ -119,7 +137,7 @@ pub enum Statement {
 The main entity of the whole parser. `Statement` is implemented as an enumeration because adding functionality is as easy as adding an enumeration constant and implementing functionality for that enumeration constant (implementation in the database command interpreter, which is not a part of this project). Parsing any correct `SELECT` or `CREATE`  (or `UPDATE`, `INSERT INTO`, ... hypothetically) statement should be turned into an instance of this enumeration. Ultimately, your main parser function (something like `build_statement(query: &str) -> Statement`) should return this enumeration.
 
 The `SELECT` statement has four components:
-1. `columns` – A vector of columns from the selected table that the database should return.
+1. `columns` – A vector of columns (selection expressions) from the selected table that the database should return.
 2. `from` – A simple string, containing a table that is being queried (we aren't doing joins because they complicate stuff too much for this project).
 3. `where` – A single expression that is the actual filter for the database query. It is wrapped in an `Option` because not every `SELECT` query contains a filter. The actual name is `r#where` because in Rust, `where` is a reserved keyword, and the prefix `r#` means: interpret this token as a raw string, do not check for keyword matches.
 4. `orderby` – A vector of expressions that define how the data should be ordered. A vector is needed because the data can be ordered by the first column, and then all data that has the same first column can be ordered by the second column, ... Also, the data can be ordered not simply by columns, but by complex expressions as well.

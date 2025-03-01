@@ -2,5 +2,6 @@
 name = "programming_languages_project_your_index_number"
 version = "0.0.0"
 edition = "2021"
+authors = ["your_academic_email"]
 
 [dependencies]

@@ -13,6 +13,11 @@
 <div class="Box-body readme blob js-code-block-container p-5 p-xl-6" id="user-content-file-docker-image-pull-md-readme" style="margin-left: 40px; margin-right: 40px; margin-top: 20px; margin-bottom: 20px">
 <article class="markdown-body entry-content container-lg" itemprop="text">
 <div class="markdown-heading"><h1 class="heading-element">Programming Languages – project specification</h1><a aria-label="Permalink: Programming Languages – project specification" class="anchor" href="#user-content-programming-languages--project-specification" id="user-content-programming-languages--project-specification" name="user-content-programming-languages--project-specification"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<div class="markdown-heading"><h2 class="heading-element">Project specification changelog</h2><a aria-label="Permalink: Project specification changelog" class="anchor" href="#user-content-project-specification-changelog" id="user-content-project-specification-changelog" name="user-content-project-specification-changelog"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>Look here for any changes to the specification.</p>
+<ul>
+<li>11.02.2025. – Initial project specification</li>
+</ul>
 <div class="markdown-heading"><h2 class="heading-element">About the project</h2><a aria-label="Permalink: About the project" class="anchor" href="#user-content-about-the-project" id="user-content-about-the-project" name="user-content-about-the-project"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
 <p>The project involves implementing a <code>SQL</code> parser in Rust. It focuses on parsing <code>SELECT</code> and <code>CREATE</code> statements with <code>FROM</code>, <code>WHERE</code>, and <code>ORDER BY</code> clauses. The goal is to develop a tokenizer, a parser, a simple CLI and an error-handling mechanism, all of which are combined in order to evaluate a string from a command-line input and output an <code>SQL</code> statement.</p>
 <div class="markdown-heading"><h2 class="heading-element">Project structure</h2><a aria-label="Permalink: Project structure" class="anchor" href="#user-content-project-structure" id="user-content-project-structure" name="user-content-project-structure"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
@@ -25,15 +30,15 @@
 <li>CLI – a simple command line interface that loops indefinitely: ask the user for a query, parse the query, display the result (or an error).</li>
 </ul>
 <div class="markdown-heading"><h2 class="heading-element">Project goal</h2><a aria-label="Permalink: Project goal" class="anchor" href="#user-content-project-goal" id="user-content-project-goal" name="user-content-project-goal"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
-<p>Our goal with this project is to teach you Rust through parsing, and we have chosen the <code>SQL</code> language to parse because of its relative simplicity to other programming languages.</p>
+<p>Our goal with this project is to teach you Rust through parsing, and we have chosen this subset of the <code>SQL</code> language to parse because of its relative simplicity to other programming languages.</p>
 <div class="markdown-heading"><h2 class="heading-element">Dos and don'ts</h2><a aria-label="Permalink: Dos and don'ts" class="anchor" href="#user-content-dos-and-donts" id="user-content-dos-and-donts" name="user-content-dos-and-donts"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
 <p>You need to:</p>
 <ul>
 <li>Handle <code>SQL</code> syntax errors such as <code>SELECT / 5 FROM math;</code> or <code>SELECT "no matching quotes string' FROM strings;</code> or <code>SELECT name WHERE age &gt; 25</code> (no <code>FROM</code> clause).</li>
-<li>Use our starting project code. You can, however, change the files hierarchy to your liking.</li>
+<li>Use our starting project code. You can, however, change the file hierarchy to your liking.</li>
 <li>Comment (document) your code to explain what the code does and how or why you did something.</li>
-<li>Put your index number in the <code>Cargo.toml</code> file instead of <code>programming_languages_project_your_index_number</code>.</li>
-<li>Contact us if you think we forgot something, made a mistake, or have any question.</li>
+<li>Put your index number in the <code>Cargo.toml</code> file instead of <code>programming_languages_project_your_index_number</code>. Also, in the <code>authors</code> list, put your academic email.</li>
+<li>Contact us if you think we forgot something, made a mistake, or have a question.</li>
 </ul>
 <p>You don't need to:</p>
 <ul>
@@ -100,6 +105,12 @@
 <li>
 <code>Keyword</code> – <code>SQL</code> reserved keywords</li>
 </ul>
+<p>Since this project isn't structured like the other projects you have already worked on, we are giving you a general guide on development steps. You don't have to follow these steps, but they are here to give you a sense of direction.</p>
+<p>Firstly, transforming a string directly into an SQL statement is hard, because you need to make your parser work with characters one by one. This is where the tokenizer comes into play, and you should develop the tokenizer before anything else. When you have a tokenizer, your basic entity aren't characters anymore, but tokens, and in the parser, there is no worry if a token is typed correctly, or if the token should be interpreted as a keyword, or a number, ...</p>
+<p>Secondly, when you make your tokenizer work, you should begin on implementing the Pratt parsing technique. The Pratt parsing technique is essentially a couple of functions that call each other to create an <code>Expression</code>. Test it in an isolated environment, where you can feed it arbitrary tokens that you know can be parsed into a valid <code>Expression</code>.</p>
+<p>Thirdly, the SQL parser, which utilizes the tokenizer and the Pratt parsing technique, is where the SQL logic handled. The SQL parser calls the tokenizer to enable working with tokens. Here, when the user calls the <code>build_statement</code> function, you firstly check if the first token in the sequence is <code>SELECT</code> or <code>CREATE</code>. In the case of <code>CREATE</code>, you must check if the second token in the sequence is <code>TABLE</code>. If the tokens aren't in the correct order, return an error to the user. When you know that, for example, the first token is <code>SELECT</code>, you know that the next batch of tokens are going to be related to the selection expressions. Since selection expressions are separated by a comma, check for commas after each selection expression. When you know there aren't any more selection expressions, the <code>FROM</code> keyword must be next. Return an error if there is no <code>FROM</code> keyword, or if there is no string after the <code>FROM</code> keyword (this string is the table name). Now, you know that the <code>WHERE</code> keyword may come, if it's there, parse the expression after it, if it's not there, <code>ORDER</code>, <code>BY</code> may come, parse the expression after it. This logic is the same in the <code>CREATE TABLE</code> statement, but for different keywords and different requirements. When you have all the parts of either statement, create an instance of <code>Statement</code> and return it to the user.</p>
+<p>When you finish with these three parts, implement a simple CLI and thoroughly test the code.</p>
+<p>Error handling can be done on the way, but you can make it more robust once you know you have a working application.</p>
 <hr/>
 <div class="markdown-heading"><h3 class="heading-element">Entities related to the <code>Statement</code> enum (the first big concept)</h3><a aria-label="Permalink: Entities related to the Statement enum (the first big concept)" class="anchor" href="#user-content-entities-related-to-the-statement-enum-the-first-big-concept" id="user-content-entities-related-to-the-statement-enum-the-first-big-concept" name="user-content-entities-related-to-the-statement-enum-the-first-big-concept"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
 <div class="highlight highlight-source-rust"><pre><span class="pl-c1">#<span class="pl-kos">[</span>derive<span class="pl-kos">(</span><span class="pl-v">Debug</span><span class="pl-kos">,</span> <span class="pl-v">PartialEq</span><span class="pl-kos">)</span><span class="pl-kos">]</span></span>  
@@ -119,13 +130,13 @@
 <p>The <code>SELECT</code> statement has four components:</p>
 <ol>
 <li>
-<code>columns</code> – A vector of columns from the selected table that the database should return.</li>
+<code>columns</code> – A vector of columns (selection expressions) from the selected table that the database should return.</li>
 <li>
 <code>from</code> – A simple string, containing a table that is being queried (we aren't doing joins because they complicate stuff too much for this project).</li>
 <li>
 <code>where</code> – A single expression that is the actual filter for the database query. It is wrapped in an <code>Option</code> because not every <code>SELECT</code> query contains a filter. The actual name is <code>r#where</code> because in Rust, <code>where</code> is a reserved keyword, and the prefix <code>r#</code> means: interpret this token as a raw string, do not check for keyword matches.</li>
 <li>
-<code>orderby</code> – A vector of expressions that define how should the data be ordered. A vector is needed because the data can be ordered by the first column, and then all data that has the same first column can be ordered by the second column, ... Also, the data can be ordered not simply by columns, but by complex expressions as well.</li>
+<code>orderby</code> – A vector of expressions that define how the data should be ordered. A vector is needed because the data can be ordered by the first column, and then all data that has the same first column can be ordered by the second column, ... Also, the data can be ordered not simply by columns, but by complex expressions as well.</li>
 </ol>
 <p>The <code>CREATE TABLE</code> statement has two components:</p>
 <ol>
