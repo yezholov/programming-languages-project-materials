@@ -25,26 +25,25 @@ Our goal with this project is to teach you Rust through parsing, and we have cho
 ## Dos and don'ts
 
 You need to:
-* Handle `SQL` syntax errors such as `SELECT / 5 FROM math;` or `SELECT "no matching quotes string' FROM strings;` or `SELECT name WHERE age > 25` (no `FROM` clause).
 * Use our starting project code. You can, however, change the file hierarchy to your liking.
 * Comment (document) your code to explain what the code does and how or why you did something.
-* Put your index number in the `Cargo.toml` file instead of `programming_languages_project_your_index_number`. Also, in the `authors` list, put your academic email.
+* Put your name and surname in the `Cargo.toml` file instead of `programming_languages_project_name_surname`. Also, in the `authors` list, put your academic email.
 * Contact us if you think we forgot something, made a mistake, or have a question.
 
 You don't need to:
 * Semantically check the parsed expressions, meaning you don't need to check for types of columns in clauses (`SELECT name FROM users WHERE name = 5;` is completely okay) and you don't need to check for mathematical errors such as dividing by zero. This is because, in a real database, this step is done only after parsing.
 * Implement floating point numbers.
 * Use `git`, but we will be thankful if you do.
-* Use Rust's iterators and functional paradigm but it is recommended. This topic will be covered in one of our lab work classes.
+* Use Rust's functional paradigm but it is recommended. This topic will be covered in one of our lab work classes.
 
 ## Grading
 
 You can get up to 40 points on the project, and they are divided into five sections that follow the project structure:
-* Tokenizer – implementing the tokenizer gets you up to 10 points.
+* Tokenizer – implementing the tokenizer gets you up to 6 points.
 * Pratt expression parser – implementing the Pratt parsing technique for expressions gets you up to 10 points (requires a functioning tokenizer).
-* `SQL` parser – implementing the `SQL` parser gets you up to 15 points (requires a functioning Pratt parser).
-* Error handling – implementing correct error handling gets you up to 3 points.
-* CLI – implementing a CLI for the application gets you up to 2 points.
+* `SQL` parser – implementing the `SQL` parser gets you up to 13 points (requires a functioning Pratt parser).
+* Error handling – implementing correct error handling gets you up to 10 points.
+* CLI – implementing a CLI for the application gets you up to 1 point.
 
 Note: Points are given based on error resistance of the components and how correct are their outputs.
 
@@ -52,13 +51,35 @@ Note: Do **not** develop other parsing techniques if you are developing the proj
 
 Note: When we say that the Pratt expression parser requires a functioning tokenizer, that doesn't mean the tokenizer needs to be 100 percent correct, just that it performs it's function to some degree that the Pratt expression parser can understand.
 
-Note: Some form of error handling is strictly necessary, it can be a simple `panic!()` call on error encounter anywhere in the pipeline.
-
 Note: For your points to count, you need to be able to verbally explain your code.
 
-Note: To pass the project, you need to have at least a **third** of the points in every section except error handling and the CLI (4 + 4 + 5). To pass lab work overall you need at least 25 points (homework + project + bonus).
+Note: To pass the project, you need to have at least a **half** of the points in every section except the CLI (3 + 5 + 6 + 5). To pass lab work overall you need at least 25 points (homework + project + bonus).
 
 Note: Any form of plagiarism will be met with a 0 point project grade.
+
+| Functionality                                                                                                                                                                             | Number of points | 
+|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------:|
+| 1. **Tokenizer** - tokenization of single character tokens (`+, -, *, /, =, ...`)                                                                                                         |       0.5        |
+| 2. **Tokenizer** - tokenization of multiple character tokens (`>=, <=, !=, ...`)                                                                                                          |       0.5        |
+| 3. **Tokenizer** - tokenization of numbers                                                                                                                                                |        1         |
+| 4. **Tokenizer** - tokenization of strings (`"String", 'String'`)                                                                                                                         |        1         |
+| 5. **Tokenizer** - tokenization of keywords (`SELECT, CREATE, WHERE, ...`)                                                                                                                |        1         |
+| 6. **Tokenizer** - tokenization of identifiers (`x, y, name, surname, ...`)                                                                                                               |        1         |
+| 7. **Tokenizer** - implementation with an iterator                                                                                                                                        |        1         |
+| 8. **Pratt parser** - correct order of operations                                                                                                                                         |        2         |
+| 9. **Pratt parser** - handling parentheses                                                                                                                                                |        1         |
+| 10. **Pratt parser** - parsing binary operations (`1 + 2, 3 / 4, ((17 - x) * 22 - 7) / 5, ...`)                                                                                           |        4         |
+| 11. **Pratt parser** - parsing unary operations (`-5 + 6, 7 - -8`)                                                                                                                        |        3         |
+| 12. **SQL parser** - parsing `SELECT` without `WHERE` and without `ORDER BY`                                                                                                              |        3         |
+| 13. **SQL parser** - parsing `SELECT` with optional `WHERE` and optional `ORDER BY`                                                                                                       |        3         |
+| 14. **SQL parser** - parsing `CREATE TABLE` with types only                                                                                                                               |        4         |
+| 15. **SQL parser** - parsing `CREATE TABLE` with types and constraints                                                                                                                    |        3         |
+| 16. **Error handling (tokenizer)** - handle errors from the tokenizer (quotes not matched, ...)                                                                                           |        1         |
+| 17. **Error handling (pratt parser)** - handle errors in the pratt parser (expression ended early, invalid token, ...)                                                                    |        1         |
+| 18. **Error handling (SQL parser)** - handle errors while building a `SELECT` statement (no `FROM` keyword, ...)                                                                          |        3         |
+| 19. **Error handling (SQL parser)** - handle errors while building a `CREATE TABLE` statement (no length on `VARCHAR` type, expression not correct in `CHECK` constraint, ...)            |        4         |
+| 20. **Error handling** - handle and propagate errors with a `Result` enumeration instead of calling `panic!()`                                                                            |        1         |
+| 21. **CLI** - make a CLI that infinitely loops and prints to the user the inputted string as a parsed statement                                                                           |        1         |
 
 ## Bonus points
 

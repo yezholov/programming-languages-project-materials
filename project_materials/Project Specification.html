@@ -34,10 +34,9 @@
 <div class="markdown-heading"><h2 class="heading-element">Dos and don'ts</h2><a aria-label="Permalink: Dos and don'ts" class="anchor" href="#user-content-dos-and-donts" id="user-content-dos-and-donts" name="user-content-dos-and-donts"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
 <p>You need to:</p>
 <ul>
-<li>Handle <code>SQL</code> syntax errors such as <code>SELECT / 5 FROM math;</code> or <code>SELECT "no matching quotes string' FROM strings;</code> or <code>SELECT name WHERE age &gt; 25</code> (no <code>FROM</code> clause).</li>
 <li>Use our starting project code. You can, however, change the file hierarchy to your liking.</li>
 <li>Comment (document) your code to explain what the code does and how or why you did something.</li>
-<li>Put your index number in the <code>Cargo.toml</code> file instead of <code>programming_languages_project_your_index_number</code>. Also, in the <code>authors</code> list, put your academic email.</li>
+<li>Put your name and surname in the <code>Cargo.toml</code> file instead of <code>programming_languages_project_name_surname</code>. Also, in the <code>authors</code> list, put your academic email.</li>
 <li>Contact us if you think we forgot something, made a mistake, or have a question.</li>
 </ul>
 <p>You don't need to:</p>
@@ -45,25 +44,121 @@
 <li>Semantically check the parsed expressions, meaning you don't need to check for types of columns in clauses (<code>SELECT name FROM users WHERE name = 5;</code> is completely okay) and you don't need to check for mathematical errors such as dividing by zero. This is because, in a real database, this step is done only after parsing.</li>
 <li>Implement floating point numbers.</li>
 <li>Use <code>git</code>, but we will be thankful if you do.</li>
-<li>Use Rust's iterators and functional paradigm but it is recommended. This topic will be covered in one of our lab work classes.</li>
+<li>Use Rust's functional paradigm but it is recommended. This topic will be covered in one of our lab work classes.</li>
 </ul>
 <div class="markdown-heading"><h2 class="heading-element">Grading</h2><a aria-label="Permalink: Grading" class="anchor" href="#user-content-grading" id="user-content-grading" name="user-content-grading"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
 <p>You can get up to 40 points on the project, and they are divided into five sections that follow the project structure:</p>
 <ul>
-<li>Tokenizer – implementing the tokenizer gets you up to 10 points.</li>
+<li>Tokenizer – implementing the tokenizer gets you up to 6 points.</li>
 <li>Pratt expression parser – implementing the Pratt parsing technique for expressions gets you up to 10 points (requires a functioning tokenizer).</li>
 <li>
-<code>SQL</code> parser – implementing the <code>SQL</code> parser gets you up to 15 points (requires a functioning Pratt parser).</li>
-<li>Error handling – implementing correct error handling gets you up to 3 points.</li>
-<li>CLI – implementing a CLI for the application gets you up to 2 points.</li>
+<code>SQL</code> parser – implementing the <code>SQL</code> parser gets you up to 13 points (requires a functioning Pratt parser).</li>
+<li>Error handling – implementing correct error handling gets you up to 10 points.</li>
+<li>CLI – implementing a CLI for the application gets you up to 1 point.</li>
 </ul>
 <p>Note: Points are given based on error resistance of the components and how correct are their outputs.</p>
 <p>Note: Do <strong>not</strong> develop other parsing techniques if you are developing the project ahead of lab work schedule. Pratt parsing was chosen for a reason, and you will probably lose all points in that grading section.</p>
 <p>Note: When we say that the Pratt expression parser requires a functioning tokenizer, that doesn't mean the tokenizer needs to be 100 percent correct, just that it performs it's function to some degree that the Pratt expression parser can understand.</p>
-<p>Note: Some form of error handling is strictly necessary, it can be a simple <code>panic!()</code> call on error encounter anywhere in the pipeline.</p>
 <p>Note: For your points to count, you need to be able to verbally explain your code.</p>
-<p>Note: To pass the project, you need to have at least a <strong>third</strong> of the points in every section except error handling and the CLI (4 + 4 + 5). To pass lab work overall you need at least 25 points (homework + project + bonus).</p>
+<p>Note: To pass the project, you need to have at least a <strong>half</strong> of the points in every section except the CLI (3 + 5 + 6 + 5). To pass lab work overall you need at least 25 points (homework + project + bonus).</p>
 <p>Note: Any form of plagiarism will be met with a 0 point project grade.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Functionality</th>
+<th align="center">Number of points</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">1. <strong>Tokenizer</strong> - tokenization of single character tokens (<code>+, -, *, /, =, ...</code>)</td>
+<td align="center">0.5</td>
+</tr>
+<tr>
+<td align="left">2. <strong>Tokenizer</strong> - tokenization of multiple character tokens (<code>&gt;=, &lt;=, !=, ...</code>)</td>
+<td align="center">0.5</td>
+</tr>
+<tr>
+<td align="left">3. <strong>Tokenizer</strong> - tokenization of numbers</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="left">4. <strong>Tokenizer</strong> - tokenization of strings (<code>"String", 'String'</code>)</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="left">5. <strong>Tokenizer</strong> - tokenization of keywords (<code>SELECT, CREATE, WHERE, ...</code>)</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="left">6. <strong>Tokenizer</strong> - tokenization of identifiers (<code>x, y, name, surname, ...</code>)</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="left">7. <strong>Tokenizer</strong> - implementation with an iterator</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="left">8. <strong>Pratt parser</strong> - correct order of operations</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="left">9. <strong>Pratt parser</strong> - handling parentheses</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="left">10. <strong>Pratt parser</strong> - parsing binary operations (<code>1 + 2, 3 / 4, ((17 - x) * 22 - 7) / 5, ...</code>)</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="left">11. <strong>Pratt parser</strong> - parsing unary operations (<code>-5 + 6, 7 - -8</code>)</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="left">12. <strong>SQL parser</strong> - parsing <code>SELECT</code> without <code>WHERE</code> and without <code>ORDER BY</code>
+</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="left">13. <strong>SQL parser</strong> - parsing <code>SELECT</code> with optional <code>WHERE</code> and optional <code>ORDER BY</code>
+</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="left">14. <strong>SQL parser</strong> - parsing <code>CREATE TABLE</code> with types only</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="left">15. <strong>SQL parser</strong> - parsing <code>CREATE TABLE</code> with types and constraints</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="left">16. <strong>Error handling (tokenizer)</strong> - handle errors from the tokenizer (quotes not matched, ...)</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="left">17. <strong>Error handling (pratt parser)</strong> - handle errors in the pratt parser (expression ended early, invalid token, ...)</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="left">18. <strong>Error handling (SQL parser)</strong> - handle errors while building a <code>SELECT</code> statement (no <code>FROM</code> keyword, ...)</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="left">19. <strong>Error handling (SQL parser)</strong> - handle errors while building a <code>CREATE TABLE</code> statement (no length on <code>VARCHAR</code> type, expression not correct in <code>CHECK</code> constraint, ...)</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="left">20. <strong>Error handling</strong> - handle and propagate errors with a <code>Result</code> enumeration instead of calling <code>panic!()</code>
+</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="left">21. <strong>CLI</strong> - make a CLI that infinitely loops and prints to the user the inputted string as a parsed statement</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
 <div class="markdown-heading"><h2 class="heading-element">Bonus points</h2><a aria-label="Permalink: Bonus points" class="anchor" href="#user-content-bonus-points" id="user-content-bonus-points" name="user-content-bonus-points"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
 <ul>
 <li>Classroom activity (as previously mentioned) – up to 1 point</li>
