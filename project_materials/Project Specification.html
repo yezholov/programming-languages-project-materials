@@ -46,21 +46,21 @@
 <li>Use <code>git</code>, but we will be thankful if you do.</li>
 <li>Use Rust's functional paradigm but it is recommended. This topic will be covered in one of our lab work classes.</li>
 </ul>
-<div class="markdown-heading"><h2 class="heading-element">Grading</h2><a aria-label="Permalink: Grading" class="anchor" href="#user-content-grading" id="user-content-grading" name="user-content-grading"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<div class="markdown-heading"><h2 class="heading-element">Grading and submission</h2><a aria-label="Permalink: Grading and submission" class="anchor" href="#user-content-grading-and-submission" id="user-content-grading-and-submission" name="user-content-grading-and-submission"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
 <p>You can get up to 40 points on the project, and they are divided into five sections that follow the project structure:</p>
 <ul>
-<li>Tokenizer – implementing the tokenizer gets you up to 6 points.</li>
+<li>Tokenizer – implementing the tokenizer gets you up to 7 points.</li>
 <li>Pratt expression parser – implementing the Pratt parsing technique for expressions gets you up to 10 points (requires a functioning tokenizer).</li>
 <li>
 <code>SQL</code> parser – implementing the <code>SQL</code> parser gets you up to 13 points (requires a functioning Pratt parser).</li>
-<li>Error handling – implementing correct error handling gets you up to 10 points.</li>
+<li>Error handling – implementing correct error handling gets you up to 9 points.</li>
 <li>CLI – implementing a CLI for the application gets you up to 1 point.</li>
 </ul>
 <p>Note: Points are given based on error resistance of the components and how correct are their outputs.</p>
 <p>Note: Do <strong>not</strong> develop other parsing techniques if you are developing the project ahead of lab work schedule. Pratt parsing was chosen for a reason, and you will probably lose all points in that grading section.</p>
 <p>Note: When we say that the Pratt expression parser requires a functioning tokenizer, that doesn't mean the tokenizer needs to be 100 percent correct, just that it performs it's function to some degree that the Pratt expression parser can understand.</p>
 <p>Note: For your points to count, you need to be able to verbally explain your code.</p>
-<p>Note: To pass the project, you need to have at least a <strong>half</strong> of the points in every section except the CLI (3 + 5 + 6 + 5). To pass lab work overall you need at least 25 points (homework + project + bonus).</p>
+<p>Note: To pass the project, you need to have at least a <strong>half</strong> of the points in every section except the CLI (3 + 5 + 6 + 4). To pass lab work overall you need at least 25 points (homework + project + bonus).</p>
 <p>Note: Any form of plagiarism will be met with a 0 point project grade.</p>
 <table>
 <thead>
@@ -72,11 +72,11 @@
 <tbody>
 <tr>
 <td align="left">1. <strong>Tokenizer</strong> - tokenization of single character tokens (<code>+, -, *, /, =, ...</code>)</td>
-<td align="center">0.5</td>
+<td align="center">1</td>
 </tr>
 <tr>
 <td align="left">2. <strong>Tokenizer</strong> - tokenization of multiple character tokens (<code>&gt;=, &lt;=, !=, ...</code>)</td>
-<td align="center">0.5</td>
+<td align="center">1</td>
 </tr>
 <tr>
 <td align="left">3. <strong>Tokenizer</strong> - tokenization of numbers</td>
@@ -146,7 +146,7 @@
 </tr>
 <tr>
 <td align="left">19. <strong>Error handling (SQL parser)</strong> - handle errors while building a <code>CREATE TABLE</code> statement (no length on <code>VARCHAR</code> type, expression not correct in <code>CHECK</code> constraint, ...)</td>
-<td align="center">4</td>
+<td align="center">3</td>
 </tr>
 <tr>
 <td align="left">20. <strong>Error handling</strong> - handle and propagate errors with a <code>Result</code> enumeration instead of calling <code>panic!()</code>
@@ -159,6 +159,8 @@
 </tr>
 </tbody>
 </table>
+<div class="markdown-heading"><h3 class="heading-element">For your project to be graded, you must submit it until <strong>19.05.2025. 23:59:59</strong>.</h3><a aria-label="Permalink: For your project to be graded, you must submit it until 19.05.2025. 23:59:59." class="anchor" href="#user-content-for-your-project-to-be-graded-you-must-submit-it-until-19052025-235959" id="user-content-for-your-project-to-be-graded-you-must-submit-it-until-19052025-235959" name="user-content-for-your-project-to-be-graded-you-must-submit-it-until-19052025-235959"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<div class="markdown-heading"><h3 class="heading-element">The project should be submitted on the <strong>Moodle platform</strong>. An assigment will be created in due time.</h3><a aria-label="Permalink: The project should be submitted on the Moodle platform. An assigment will be created in due time." class="anchor" href="#user-content-the-project-should-be-submitted-on-the-moodle-platform-an-assigment-will-be-created-in-due-time" id="user-content-the-project-should-be-submitted-on-the-moodle-platform-an-assigment-will-be-created-in-due-time" name="user-content-the-project-should-be-submitted-on-the-moodle-platform-an-assigment-will-be-created-in-due-time"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
 <div class="markdown-heading"><h2 class="heading-element">Bonus points</h2><a aria-label="Permalink: Bonus points" class="anchor" href="#user-content-bonus-points" id="user-content-bonus-points" name="user-content-bonus-points"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
 <ul>
 <li>Classroom activity (as previously mentioned) – up to 1 point</li>

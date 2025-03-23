@@ -36,13 +36,13 @@ You don't need to:
 * Use `git`, but we will be thankful if you do.
 * Use Rust's functional paradigm but it is recommended. This topic will be covered in one of our lab work classes.
 
-## Grading
+## Grading and submission
 
 You can get up to 40 points on the project, and they are divided into five sections that follow the project structure:
-* Tokenizer – implementing the tokenizer gets you up to 6 points.
+* Tokenizer – implementing the tokenizer gets you up to 7 points.
 * Pratt expression parser – implementing the Pratt parsing technique for expressions gets you up to 10 points (requires a functioning tokenizer).
 * `SQL` parser – implementing the `SQL` parser gets you up to 13 points (requires a functioning Pratt parser).
-* Error handling – implementing correct error handling gets you up to 10 points.
+* Error handling – implementing correct error handling gets you up to 9 points.
 * CLI – implementing a CLI for the application gets you up to 1 point.
 
 Note: Points are given based on error resistance of the components and how correct are their outputs.
@@ -53,14 +53,14 @@ Note: When we say that the Pratt expression parser requires a functioning tokeni
 
 Note: For your points to count, you need to be able to verbally explain your code.
 
-Note: To pass the project, you need to have at least a **half** of the points in every section except the CLI (3 + 5 + 6 + 5). To pass lab work overall you need at least 25 points (homework + project + bonus).
+Note: To pass the project, you need to have at least a **half** of the points in every section except the CLI (3 + 5 + 6 + 4). To pass lab work overall you need at least 25 points (homework + project + bonus).
 
 Note: Any form of plagiarism will be met with a 0 point project grade.
 
 | Functionality                                                                                                                                                                             | Number of points | 
 |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------:|
-| 1. **Tokenizer** - tokenization of single character tokens (`+, -, *, /, =, ...`)                                                                                                         |       0.5        |
-| 2. **Tokenizer** - tokenization of multiple character tokens (`>=, <=, !=, ...`)                                                                                                          |       0.5        |
+| 1. **Tokenizer** - tokenization of single character tokens (`+, -, *, /, =, ...`)                                                                                                         |        1         |
+| 2. **Tokenizer** - tokenization of multiple character tokens (`>=, <=, !=, ...`)                                                                                                          |        1         |
 | 3. **Tokenizer** - tokenization of numbers                                                                                                                                                |        1         |
 | 4. **Tokenizer** - tokenization of strings (`"String", 'String'`)                                                                                                                         |        1         |
 | 5. **Tokenizer** - tokenization of keywords (`SELECT, CREATE, WHERE, ...`)                                                                                                                |        1         |
@@ -77,9 +77,13 @@ Note: Any form of plagiarism will be met with a 0 point project grade.
 | 16. **Error handling (tokenizer)** - handle errors from the tokenizer (quotes not matched, ...)                                                                                           |        1         |
 | 17. **Error handling (pratt parser)** - handle errors in the pratt parser (expression ended early, invalid token, ...)                                                                    |        1         |
 | 18. **Error handling (SQL parser)** - handle errors while building a `SELECT` statement (no `FROM` keyword, ...)                                                                          |        3         |
-| 19. **Error handling (SQL parser)** - handle errors while building a `CREATE TABLE` statement (no length on `VARCHAR` type, expression not correct in `CHECK` constraint, ...)            |        4         |
+| 19. **Error handling (SQL parser)** - handle errors while building a `CREATE TABLE` statement (no length on `VARCHAR` type, expression not correct in `CHECK` constraint, ...)            |        3         |
 | 20. **Error handling** - handle and propagate errors with a `Result` enumeration instead of calling `panic!()`                                                                            |        1         |
 | 21. **CLI** - make a CLI that infinitely loops and prints to the user the inputted string as a parsed statement                                                                           |        1         |
+
+### For your project to be graded, you must submit it until **19.05.2025. 23:59:59**.
+
+### The project should be submitted on the **Moodle platform**. An assigment will be created in due time.
 
 ## Bonus points
 
