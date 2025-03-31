@@ -52,7 +52,7 @@ pub(crate) enum Keyword {
 impl Display for Token {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
-            Token::Keyword(keyword) => write!(f, "{:?}", keyword),
+            Token::Keyword(keyword) => write!(f, "{}", keyword),
             Token::Identifier(iden) => write!(f, "{:?}", iden),
             Token::String(str) => write!(f, "{:?}", str),
             Token::Number(num) => write!(f, "{:?}", num),
