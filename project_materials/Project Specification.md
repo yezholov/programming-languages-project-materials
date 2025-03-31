@@ -53,8 +53,6 @@ Note: When we say that the Pratt expression parser requires a functioning tokeni
 
 Note: For your points to count, you need to be able to verbally explain your code.
 
-Note: To pass the project, you need to have at least a **half** of the points in every section except the CLI (3 + 5 + 6 + 4). To pass lab work overall you need at least 25 points (homework + project + bonus).
-
 Note: Any form of plagiarism will be met with a 0 point project grade.
 
 | Functionality                                                                                                                                                                             | Number of points | 
