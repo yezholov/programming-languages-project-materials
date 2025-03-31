@@ -81,7 +81,7 @@ Note: Any form of plagiarism will be met with a 0 point project grade.
 | 20. **Error handling** - handle and propagate errors with a `Result` enumeration instead of calling `panic!()`                                                                            |        1         |
 | 21. **CLI** - make a CLI that infinitely loops and prints to the user the inputted string as a parsed statement                                                                           |        1         |
 
-### For your project to be graded, you must submit it until **19.05.2025. 23:59:59**.
+### For your project to be graded, you must submit it until **15.05.2025. 23:59:59**.
 
 ### The project should be submitted on the **Moodle platform**. An assigment will be created in due time.
 
