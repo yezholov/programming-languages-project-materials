@@ -350,7 +350,7 @@ is a string that, when tokenized into a vector of tokens, looks like this:
 ```rust
 vec![  
     Token::Keyword(Keyword::Select),  
-    Token::String("from".to_string()),  
+    Token::String("string".to_string()),  
     Token::Keyword(Keyword::From),  
     Token::Identifier("users".to_string()),  
     Token::Semicolon,
