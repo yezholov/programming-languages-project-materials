@@ -5,6 +5,7 @@
 Look here for any changes to the specification.
 
 * 11.02.2025. – Initial project specification
+* 06.05.2025. – Fixes to the complex `CREATE TABLE` example, `column_name` and `table_name` were `Expression`s instead of `String`s
 
 ## About the project
 
@@ -650,29 +651,29 @@ CREATE TABLE complex_table(
 is a  `CREATE TABLE` statement that, when parsed, looks like this:
 ```rust
 Statement::CreateTable {
-    table_name: Expression::Identifier("complex_table".to_string()),
+    table_name: "complex_table".to_string(),
     column_list: vec![
         TableColumn {
-            column_name: Expression::Identifier("id".to_string()),
+            column_name: "id".to_string(),
             column_type: DBType::Int,
             constraints: vec![
                 Constraint::PrimaryKey,
             ],
         },
         TableColumn {
-            column_name: Expression::Identifier("email".to_string()),
+            column_name: "email".to_string(),
             column_type: DBType::Varchar(255),
             constraints: vec![
                 Constraint::NotNull,
             ],
         },
         TableColumn {
-            column_name: Expression::Identifier("is_junior".to_string()),
+            column_name: "is_junior".to_string(),
             column_type: DBType::Bool,
             constraints: vec![],
         },
         TableColumn {
-            column_name: Expression::Identifier("age".to_string()),
+            column_name: "age".to_string(),
             column_type: DBType::Int,
             constraints: vec![
                 Constraint::Check(Expression::BinaryOperation {

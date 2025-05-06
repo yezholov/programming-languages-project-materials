@@ -17,6 +17,7 @@
 <p>Look here for any changes to the specification.</p>
 <ul>
 <li>11.02.2025. – Initial project specification</li>
+<li>06.05.2025. – Fixes to the complex <code>CREATE TABLE</code> example, <code>column_name</code> and <code>table_name</code> were <code>Expression</code>s instead of <code>String</code>s</li>
 </ul>
 <div class="markdown-heading"><h2 class="heading-element">About the project</h2><a aria-label="Permalink: About the project" class="anchor" href="#user-content-about-the-project" id="user-content-about-the-project" name="user-content-about-the-project"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
 <p>The project involves implementing a <code>SQL</code> parser in Rust. It focuses on parsing <code>SELECT</code> and <code>CREATE</code> statements with <code>FROM</code>, <code>WHERE</code>, and <code>ORDER BY</code> clauses. The goal is to develop a tokenizer, a parser, a simple CLI and an error-handling mechanism, all of which are combined in order to evaluate a string from a command-line input and output an <code>SQL</code> statement.</p>
@@ -641,29 +642,29 @@
 );</pre></div>
 <p>is a  <code>CREATE TABLE</code> statement that, when parsed, looks like this:</p>
 <div class="highlight highlight-source-rust"><pre><span class="pl-smi">Statement</span><span class="pl-kos">::</span><span class="pl-smi">CreateTable</span> <span class="pl-kos">{</span>
-    <span class="pl-c1">table_name</span><span class="pl-kos">:</span> <span class="pl-smi">Expression</span><span class="pl-kos">::</span><span class="pl-en">Identifier</span><span class="pl-kos">(</span><span class="pl-s">"complex_table"</span><span class="pl-kos">.</span><span class="pl-en">to_string</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">)</span><span class="pl-kos">,</span>
+    <span class="pl-c1">table_name</span><span class="pl-kos">:</span> <span class="pl-s">"complex_table"</span><span class="pl-kos">.</span><span class="pl-en">to_string</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">,</span>
     <span class="pl-c1">column_list</span><span class="pl-kos">:</span> <span class="pl-en">vec</span><span class="pl-en">!</span><span class="pl-kos">[</span>
         <span class="pl-v">TableColumn</span> <span class="pl-kos">{</span>
-            column_name<span class="pl-kos">:</span> <span class="pl-v">Expression</span><span class="pl-kos">::</span><span class="pl-v">Identifier</span><span class="pl-kos">(</span><span class="pl-s">"id"</span><span class="pl-kos">.</span>to_string<span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">)</span><span class="pl-kos">,</span>
+            column_name<span class="pl-kos">:</span> <span class="pl-s">"id"</span><span class="pl-kos">.</span>to_string<span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">,</span>
             column_type<span class="pl-kos">:</span> <span class="pl-v">DBType</span><span class="pl-kos">::</span><span class="pl-v">Int</span><span class="pl-kos">,</span>
             constraints<span class="pl-kos">:</span> vec!<span class="pl-kos">[</span>
                 <span class="pl-v">Constraint</span><span class="pl-kos">::</span><span class="pl-v">PrimaryKey</span><span class="pl-kos">,</span>
             <span class="pl-kos">]</span><span class="pl-kos">,</span>
         <span class="pl-kos">}</span><span class="pl-kos">,</span>
         <span class="pl-v">TableColumn</span> <span class="pl-kos">{</span>
-            column_name<span class="pl-kos">:</span> <span class="pl-v">Expression</span><span class="pl-kos">::</span><span class="pl-v">Identifier</span><span class="pl-kos">(</span><span class="pl-s">"email"</span><span class="pl-kos">.</span>to_string<span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">)</span><span class="pl-kos">,</span>
+            column_name<span class="pl-kos">:</span> <span class="pl-s">"email"</span><span class="pl-kos">.</span>to_string<span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">,</span>
             column_type<span class="pl-kos">:</span> <span class="pl-v">DBType</span><span class="pl-kos">::</span><span class="pl-v">Varchar</span><span class="pl-kos">(</span><span class="pl-c1">255</span><span class="pl-kos">)</span><span class="pl-kos">,</span>
             constraints<span class="pl-kos">:</span> vec!<span class="pl-kos">[</span>
                 <span class="pl-v">Constraint</span><span class="pl-kos">::</span><span class="pl-v">NotNull</span><span class="pl-kos">,</span>
             <span class="pl-kos">]</span><span class="pl-kos">,</span>
         <span class="pl-kos">}</span><span class="pl-kos">,</span>
         <span class="pl-v">TableColumn</span> <span class="pl-kos">{</span>
-            column_name<span class="pl-kos">:</span> <span class="pl-v">Expression</span><span class="pl-kos">::</span><span class="pl-v">Identifier</span><span class="pl-kos">(</span><span class="pl-s">"is_junior"</span><span class="pl-kos">.</span>to_string<span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">)</span><span class="pl-kos">,</span>
+            column_name<span class="pl-kos">:</span> <span class="pl-s">"is_junior"</span><span class="pl-kos">.</span>to_string<span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">,</span>
             column_type<span class="pl-kos">:</span> <span class="pl-v">DBType</span><span class="pl-kos">::</span><span class="pl-v">Bool</span><span class="pl-kos">,</span>
             constraints<span class="pl-kos">:</span> vec!<span class="pl-kos">[</span><span class="pl-kos">]</span><span class="pl-kos">,</span>
         <span class="pl-kos">}</span><span class="pl-kos">,</span>
         <span class="pl-v">TableColumn</span> <span class="pl-kos">{</span>
-            column_name<span class="pl-kos">:</span> <span class="pl-v">Expression</span><span class="pl-kos">::</span><span class="pl-v">Identifier</span><span class="pl-kos">(</span><span class="pl-s">"age"</span><span class="pl-kos">.</span>to_string<span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">)</span><span class="pl-kos">,</span>
+            column_name<span class="pl-kos">:</span> <span class="pl-s">"age"</span><span class="pl-kos">.</span>to_string<span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">,</span>
             column_type<span class="pl-kos">:</span> <span class="pl-v">DBType</span><span class="pl-kos">::</span><span class="pl-v">Int</span><span class="pl-kos">,</span>
             constraints<span class="pl-kos">:</span> vec!<span class="pl-kos">[</span>
                 <span class="pl-v">Constraint</span><span class="pl-kos">::</span><span class="pl-v">Check</span><span class="pl-kos">(</span><span class="pl-v">Expression</span><span class="pl-kos">::</span><span class="pl-v">BinaryOperation</span> <span class="pl-kos">{</span>
