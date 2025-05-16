@@ -376,6 +376,7 @@ pub enum Expression {
     Bool(bool),
     Identifier(String),
     String(String),
+    Wildcard,
 }
 
 /// A structure containing a definition for one column, when creating a table.
@@ -480,7 +481,8 @@ impl Display for Expression {
             Expression::Number(num) => write!(f, "{num}"),
             Expression::Identifier(iden) => write!(f, "{}", iden),
             Expression::String(str) => write!(f, "\"{}\"", str),
-            Expression::Bool(b) => write!(f, "{}", b)
+            Expression::Bool(b) => write!(f, "{}", b),
+            Expression::Wildcard => write!(f, "*"),
         }
     }
 }

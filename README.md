@@ -2,6 +2,8 @@
 
 Author: **Kyrylo Yezholov** kyrylo.yezholov@sa.stud.vu.lt @yezholov / @kirillezh
 
+---
+
 This repository contains the materials required for the project of the subject "Programming materials".
 
 Detailed project specification is given in the `project_materials/Project specification.md` file. You could use the `project_materials/Project specification.html` file for local rendering.
@@ -9,3 +11,5 @@ Detailed project specification is given in the `project_materials/Project specif
 Code is given in the `src/` directory.
 
 When developing your own project based on this repository, don't forget to put your academic email and name in the `Cargo.toml` file according to the rules written in the specification.
+
+GitHub URL: [https://github.com/yezholov/programming-languages-project-materials](https://github.com/yezholov/programming-languages-project-materials) (commit will be added after deadline)

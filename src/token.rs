@@ -1,7 +1,7 @@
 use std::fmt::{Debug, Display, Formatter};
 
 #[derive(PartialEq, Clone, Debug)]
-pub(crate) enum Token {
+pub enum Token {
     Keyword(Keyword),
     Identifier(String),
     String(String),
@@ -25,7 +25,7 @@ pub(crate) enum Token {
 }
 
 #[derive(PartialEq, Clone, Debug)]
-pub(crate) enum Keyword {
+pub enum Keyword {
     Select,
     Create,
     Table,

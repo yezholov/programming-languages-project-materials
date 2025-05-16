@@ -1,7 +1,10 @@
 [package]
-name = "programming_languages_project_Kyrylo_Yezholov"
+name = "programming_languages_project_kyrylo_yezholov"
 version = "0.0.1"
 edition = "2021"
 authors = ["kyrylo.yezholov@sa.stud.vu.lt", "@yezholov", "@kirillezh"]
+
+[lib]
+doctest = false
 
 [dependencies]
